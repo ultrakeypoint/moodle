@@ -3,7 +3,9 @@
   "private": true,
   "description": "Moodle",
   "scripts": {
-    "upgradenote": "node .grunt/upgradenotes.mjs create"
+    "upgradenote": "node .grunt/upgradenotes.mjs create",
+    "docker:up": "docker-compose -f docker/docker-compose.yml up -d",
+    "docker:down": "docker-compose -f docker/docker-compose.yml down"
   },
   "devDependencies": {
     "@babel/core": "7.17.5",
