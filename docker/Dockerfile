@@ -20,6 +20,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     xml \
     soap \
     opcache \
+    exif \
     && pecl install apcu \
     && docker-php-ext-enable apcu
 
@@ -35,4 +36,14 @@ RUN a2ensite 000-default
 # Apache 모듈 활성화
 RUN a2enmod rewrite deflate expires
 
+# Composer 설치
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# 엔트리포인트 스크립트 복사
+COPY moodle/entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 WORKDIR /var/www/html
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["apache2-foreground"]
