@@ -19,9 +19,9 @@ services:
       timeout: 5s
       retries: 5
       
-  moodle:
+  moodle-app:
     build: .
-    container_name: moodle
+    container_name: moodle-app
     ports:
       - "80:80"
     environment:
